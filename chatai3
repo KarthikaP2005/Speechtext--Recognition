@@ -1,0 +1,17 @@
+from openai import OpenAI
+client=OpenAI(
+    api_key="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",
+    base_url= "https://openrouter.ai/api/v1"
+)
+
+user_input = input("You: ")
+
+reply=""
+
+response=client.chat.completions.create(
+    model="mistralai/mistral-7b-instruct",
+    messages=[{"role": "system", "content": "You are a helpful assistant"}, {"role": "user", "content": f"{user_input}\nThink step by step."}, {"role": "assistant", "content": reply}]
+)
+
+reply = response.choices[0].message.content.strip()
+print(f"Chatbot: {reply}\n")
